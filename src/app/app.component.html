@@ -1,0 +1,89 @@
+<div class="main-container">
+  <mat-card>
+    <mat-card-header mat-elevation-z2>
+      <mat-card-title>Fruits & Veggies</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card class="add-new-till-item-container">
+        <mat-card-content>
+          <h4>add new item to to the till</h4>
+          <form [formGroup]="addNewTillItem" class="add-new-till-item" (ngSubmit)="onAddNewTillItem()">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Ex. Apple" formControlName="name">
+              <mat-error *ngIf="addNewTillItem.get('name').errors">please input a name for the item
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>aws</mat-label>
+              <input type="number" matInput placeholder="Integer between 0 to 1000" formControlName="aws">
+              <mat-error *ngIf="addNewTillItem.get('aws').errors">Rquires between 0 to 1000 will outomatically round up
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>clouds</mat-label>
+              <input type="number" matInput placeholder="Integer between 0 to 99" formControlName="clouds">
+              <mat-error *ngIf="addNewTillItem.get('clouds').errors">Rquires between 0 to 99 will outomatically round up
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button type="submit" [disabled]="!addNewTillItem.valid">Submit</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <app-item *ngFor="let item of tillItems" [name]="item.name" [price]="item.price" [isCartItem]="false"
+        (click)="add($event)">
+      </app-item>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Cart</mat-card-title>
+      <mat-icon>shopping_cart</mat-icon>
+    </mat-card-header>
+    <mat-card-subtitle>
+      <h3>
+        Please select:
+      </h3>
+    </mat-card-subtitle>
+    <mat-radio-group [(ngModel)]="activeCart">
+      <mat-radio-button value="1" [disabled]="!isTwoForThreeCartActive">
+        Buy 2 for 3
+      </mat-radio-button>
+      <mat-radio-button value="2" [disabled]="!isSecondHalfPriceCartActive">
+        buy 1 and get 1 half price
+      </mat-radio-button>
+      <mat-radio-button value="3" checked>
+        no offer
+      </mat-radio-button>
+    </mat-radio-group>
+    <button class="print-button" mat-raised-button color="primary" (click)="onInvoicePrint()"
+      [disabled]="cart.length < 1 && twoForThreeCart.length < 1 && secondHalfPriceCart.length < 1 ">
+      Print Invoice
+    </button>
+    <mat-card *ngIf="twoForThreeCart.length > 0" class="sub-cart">
+      <mat-card-title>Buy 2 for 3</mat-card-title>
+      <mat-card-content>
+        <app-item *ngFor="let item of twoForThreeCart; let i = index" [name]="item.name" [price]="item.price"
+          [isCartItem]="true" [index]="i" (click)="removeTwoForThreeCart($event)">
+        </app-item>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="secondHalfPriceCart.length > 0" class="sub-cart">
+      <mat-card-title>buy 1 and get 1 half price</mat-card-title>
+      <mat-card-content>
+        <app-item *ngFor="let item of secondHalfPriceCart; let i = index" [name]="item.name" [price]="item.price"
+          [isCartItem]="true" [index]="i" (click)="removeSecondHalfPriceCart($event)">
+        </app-item>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="cart.length > 0" class="sub-cart">
+      <mat-card-title>No offer</mat-card-title>
+      <mat-card-content>
+        <app-item *ngFor="let item of cart; let i = index" [name]="item.name" [price]="item.price" [isCartItem]="true"
+          [index]="i" (click)="removeCart($event)">
+        </app-item>
+      </mat-card-content>
+    </mat-card>
+  </mat-card>
+</div>

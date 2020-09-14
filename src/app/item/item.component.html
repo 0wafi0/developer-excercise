@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-card-content>
+        <h4>
+            <p>Name: {{ name }}</p>
+            Price: <app-price [price]="price"> </app-price>
+        </h4>
+        <button mat-raised-button [color]="isCartItem ? 'warn' : 'primary'"
+            (click)="onClick($event)">{{ isCartItem ? 'Remove' : 'Add' }}</button>
+    </mat-card-content>
+</mat-card>

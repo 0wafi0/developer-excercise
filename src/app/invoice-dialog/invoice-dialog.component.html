@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Reciept</h2>
+<mat-dialog-content>
+    <div *ngFor="let item of data.cart" class="item">
+        <p>Name: {{ item.name }} </p>
+        <p>
+            <app-price [price]="item.price"></app-price>
+        </p>
+    </div>
+    <hr>
+    <div class="item">
+        <p>Total: </p>
+        <p>
+            <app-price [price]="total.price"></app-price>
+        </p>
+    </div>
+</mat-dialog-content>
+<button mat-button cdkFocusInitial mat-dialog-close>Ok</button>
