@@ -128,6 +128,11 @@ export class AppComponent implements AfterViewInit {
 
   onAddNewTillItem() {
     const rawItem = this.addNewTillItem.value;
+    this.addNewTillItem.reset();
+    const alreadyExists = this.tillItems.find(item => item.name === rawItem.name);
+    if (alreadyExists) {
+      return;
+    }
     this.tillItems.push({
       name: rawItem.name,
       price: Math.ceil(rawItem.aws) * 100 + Math.ceil(rawItem.clouds)
