@@ -1,3 +1,10 @@
+## How to run my implementation
+
+Demo can be found at: https://0wafi0.github.io/developer-excercise/
+
+clone repo, ensure angular cli is installed, hence install npm packages and run ng serve.
+
+
 # Developer Exercise
 
 This exercise is designed to demonstrate a candidate's abilities across a range of competencies in software development (The applicant can pick any language of their preference)
