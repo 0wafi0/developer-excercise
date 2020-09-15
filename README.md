@@ -4,6 +4,9 @@ Demo can be found at: https://0wafi0.github.io/developer-excercise/
 
 clone repo, ensure angular cli is installed, hence install npm packages and run ng serve.
 
+Please use the Chrome browser.
+
+Submit an item(s) to the till and then add them to the cart. Print the receipt. At any time, to add an item to the cart an active option needs to be selected.
 
 # Developer Exercise
 
